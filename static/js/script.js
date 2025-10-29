@@ -9,12 +9,24 @@ function addMessage(text, sender) {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
+function showLoader() {
+    let loader = document.createElement('div');
+    loader.className = 'message bot-message';
+    loader.innerHTML = '<img src="/assets/loader.gif" alt="Loading..." style="height:20px;">';
+    chatHistory.appendChild(loader);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+    return loader;
+}
+
 function sendMessage() {
     let input = document.getElementById('user-input');
     let message = input.value.trim();
-    if (message === '') return;
+    if (!message) return;
     addMessage(message, 'user');
     input.value = '';
+
+    let loader = showLoader();
+
     fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -22,6 +34,7 @@ function sendMessage() {
     })
     .then(res => res.json())
     .then(data => {
+        loader.remove();
         addMessage(data.reply, 'bot');
         updateSuggestions(data.suggestions);
     });
