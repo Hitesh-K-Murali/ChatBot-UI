@@ -1,57 +1,123 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
+
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #003366, #0055a5);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+
+.logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
 #chat-container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 90vh;
-    margin: 10px;
+    gap: 10px;
 }
-#chat-box {
-    flex: 1;
+
+#chat-history {
+    flex-grow: 1;
     overflow-y: auto;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #ccc;
+    max-height: 400px;
+    padding-right: 10px;
 }
+
 .message {
+    padding: 10px 15px;
     margin: 5px 0;
+    border-radius: 20px;
+    max-width: 70%;
+    transition: background-color 0.3s ease;
 }
-.user {
-    text-align: right;
-    color: blue;
+
+.user-message {
+    background-color: #e0f7fa;
+    align-self: flex-end;
 }
-.bot {
-    text-align: left;
-    color: green;
+
+.bot-message {
+    background-color: #e8eaf6;
+    align-self: flex-start;
 }
-#input-area {
+
+#chat-input {
     display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    gap: 10px;
 }
+
+#user-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+#user-input:focus {
+    border-color: #0055a5;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0055a5;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
 #suggestions {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 10px;
 }
+
 .suggestion {
-    background: #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 8px 15px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-#user-input {
+
+.suggestion:hover {
+    background-color: #d0d0d0;
+}
+
+footer {
+    text-align: center;
     padding: 10px;
-    font-size: 16px;
+    font-size: 0.9em;
+    color: #666;
 }

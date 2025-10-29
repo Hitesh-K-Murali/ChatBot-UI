@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Chatbot</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Imperva AI Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <header>
-        <h1>AI Chatbot</h1>
+        <img src="/static/assets/imperva-logo.png" alt="Imperva Logo" class="logo">
+        <h1>Imperva AI Assistant</h1>
     </header>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <div id="input-area">
+    <main>
+        <div id="chat-container">
+            <div id="chat-history"></div>
             <div id="suggestions"></div>
-            <input type="text" id="user-input" placeholder="Type your message here..." />
+            <div id="chat-input">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
         </div>
-    </div>
-    <script src="/js/script.js"></script>
+    </main>
+    <footer>
+        <p>Powered by Imperva</p>
+    </footer>
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
+``

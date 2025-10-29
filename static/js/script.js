@@ -1,17 +1,20 @@
-const chatBox = document.getElementById('chat-box');
-const userInput = document.getElementById('user-input');
-const suggestionsContainer = document.getElementById('suggestions');
+let chatHistory = document.getElementById('chat-history');
+let suggestionsContainer = document.getElementById('suggestions');
 
-function appendMessage(text, sender) {
-    const msg = document.createElement('div');
-    msg.classList.add('message', sender);
+function addMessage(text, sender) {
+    let msg = document.createElement('div');
+    msg.className = 'message ' + (sender === 'user' ? 'user-message' : 'bot-message');
     msg.textContent = text;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatHistory.appendChild(msg);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
-function sendMessage(message) {
-    appendMessage(message, 'user');
+function sendMessage() {
+    let input = document.getElementById('user-input');
+    let message = input.value.trim();
+    if (message === '') return;
+    addMessage(message, 'user');
+    input.value = '';
     fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,28 +22,21 @@ function sendMessage(message) {
     })
     .then(res => res.json())
     .then(data => {
-        appendMessage(data.reply, 'bot');
+        addMessage(data.reply, 'bot');
         updateSuggestions(data.suggestions);
     });
 }
 
 function updateSuggestions(suggestions) {
     suggestionsContainer.innerHTML = '';
-    suggestions.forEach(suggestion => {
-        const btn = document.createElement('div');
-        btn.classList.add('suggestion');
-        btn.textContent = suggestion;
+    suggestions.forEach(s => {
+        let btn = document.createElement('div');
+        btn.className = 'suggestion';
+        btn.textContent = s;
         btn.onclick = () => {
-            userInput.value = suggestion;
-            sendMessage(suggestion);
+            document.getElementById('user-input').value = s;
+            sendMessage();
         };
         suggestionsContainer.appendChild(btn);
     });
 }
-
-userInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter' && userInput.value.trim()) {
-        sendMessage(userInput.value.trim());
-        userInput.value = '';
-    }
-});
